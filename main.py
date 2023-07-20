@@ -24,6 +24,15 @@ async def on_ready():
 
 
 @client.event
+async def on_member_join (member):
+    channel = client.get_channel(1046091030266654740)
+
+    role = discord.utils.get(member.guild.roles, id=753566876327739463)
+    await member.add_roles(role)
+    await channel.send(embed=discord.Embed(description=f'``{member.name}`` присоиединился', color= 0x0c0c0c))
+
+
+@client.event
 async def on_command_error(ctx, error):
     """Функция вывода ошибки команды"""
     if isinstance(error, commands.CommandNotFound):
@@ -72,13 +81,13 @@ async def cat(ctx):
 
 
 @client.command()
-async def furry(ctx, member: discord.Member = None):
+async def anime(ctx, member: discord.Member = None):
     async with aiohttp.ClientSession() as session:
-        request = await session.get('https://e621.net/posts.json?limit=1')
+        request = await session.get('https://nekos.best/api/v2/neko')
         json = await request.json(content_type=None)
 
-    embed = discord.Embed(title="Кот", color=discord.Color.purple())
-    embed.set_image(url=json['url'])
+    embed = discord.Embed(title="Анимешная блядина", color=discord.Color.purple())
+    embed.set_image(url=json["results"][0]["url"])
     await ctx.send(embed=embed)
 
 
