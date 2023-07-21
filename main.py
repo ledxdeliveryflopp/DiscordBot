@@ -53,7 +53,7 @@ async def on_command_error(ctx, error):
 async def help(ctx):
     """Команда для вывода команд бота"""
     title_error_two = 'список команд'
-    desc_error_two = '!cat = вывод картинки кота\n!dog = вывод картинки собаки\n!avatar = вывод аватарки пользователя' \
+    desc_error_two = '!clear [msg_count] = удаление сообщений (для админов)\n!cat = вывод картинки кота\n!dog = вывод картинки собаки\n!avatar = вывод аватарки пользователя' \
                      '\n!gaysex = специально для Блетза\n!anime = вывод аниме NSFW'
     embed_var_two = discord.Embed(title=title_error_two,
                                   description=desc_error_two,
