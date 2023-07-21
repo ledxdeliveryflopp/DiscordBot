@@ -1,11 +1,9 @@
-import csv
-import io
-
 from discord.ext import commands
 import aiohttp
 import discord
 import os
 from dotenv import load_dotenv
+from predicate import predicate_channel, predicate_furry_channel, predicate_vk_channel
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
@@ -13,10 +11,6 @@ vk_token = os.getenv('VK_TOKEN')
 vk_api_vesion = os.getenv('API_VERSION')
 vk_domain = os.getenv('DOMAIN')
 vk_count = os.getenv('COUNT')
-
-f = open('club_lubiteley_interneta.txt')
-csv_f = csv.reader(f)
-buf = io.BytesIO(b'thedata')
 
 intents = discord.Intents.all()
 intents.members = True
@@ -27,41 +21,13 @@ client = commands.Bot(command_prefix='!', intents=intents)
 client.remove_command('help')
 
 
-@client.event
-async def on_ready():
-    print("Ready")
-
-
-def predicate_channel(ctx):
-    """Ограничение для вызова команд в опеределенном канале"""
-    channel = client.get_channel(753565123397943358)
-    if ctx.channel != channel:
-        return False
-    else:
-        return True
-
-
-def predicate_furry_channel(ctx):
-    """Ограничение для вызова команд в опеределенном канале"""
-    bot_channel = client.get_channel(1108066137847119966)
-    if ctx.channel != bot_channel:
-        return False
-    else:
-        return True
-
-
-def predicate_vk_channel(ctx):
-    """Ограничение для вызова команд в опеределенном канале"""
-    bot_channel = client.get_channel(1132048003113418822)
-    if ctx.channel != bot_channel:
-        return False
-    else:
-        return True
-
-
 has_channel = commands.check(predicate_channel)
 has_furry_channel = commands.check(predicate_furry_channel)
 has_vk_channel = commands.check(predicate_vk_channel)
+
+@client.event
+async def on_ready():
+    print("Ready")
 
 
 async def on_member_join(member):
@@ -189,3 +155,4 @@ async def vk(ctx):
 
 
 client.run(token)
+
