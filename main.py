@@ -1,5 +1,3 @@
-import io
-
 from discord.ext import commands
 import aiohttp
 import discord
@@ -24,12 +22,17 @@ async def on_ready():
 
 
 @client.event
-async def on_member_join (member):
-    channel = client.get_channel(1046091030266654740)
+async def on_member_join(member):
+  channel = client.get_channel(1046091030266654740)
 
-    role = discord.utils.get(member.guild.roles, id=753566876327739463)
-    await member.add_roles(role)
-    await channel.send(embed=discord.Embed(description=f'``{member.name}`` присоиединился', color= 0x0c0c0c))
+  role = discord.utils.get(member.guild.roles, id=753566876327739463)
+  await member.add_roles(role)
+
+
+@client.event
+async def on_member_remove(member):
+  channel = client.get_channel(753517331153551412)
+  await channel.send(f"{member} (left the server).")
 
 
 @client.event
