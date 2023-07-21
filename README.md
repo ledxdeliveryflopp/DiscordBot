@@ -1,6 +1,6 @@
 # DiscordBot
 
-## Discord comamnd 
+## Discord command 
 ```
 !cat = вывод картинки кота
 !dog = вывод картинки собаки
